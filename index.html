@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Silvique | Handmade silver jewellery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* BRAND FONT: Brittany is a Canva font, so it can't load from a CDN.
+   To use it, export the font file and uncomment (host it, or embed as a data: URI):
+@font-face { font-family: 'Brittany'; src: url('brittany.woff2') format('woff2'); font-display: swap; }
+*/
+:root {
+  color-scheme: dark;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --black: #000;
+  --white: #fff;
+  --grey: #a3a3a3;
+  --line: #2a2a2a;
+  --panel: #0e0e0e;
+  --script: 'Brittany', 'Mrs Saint Delafield', cursive;
+  --sans: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: inherit; }
+body { margin: 0; background: var(--black); color: var(--white); font-family: var(--sans); font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+.hero { text-align: center; padding: 72px 20px 40px; }
+.wordmark { font-family: var(--script); font-weight: 400; font-size: clamp(88px, 22vw, 200px); line-height: .9; margin: 0; letter-spacing: 0; }
+.logo { display: block; margin: 0 auto; max-width: min(80vw, 520px); max-height: 220px; width: auto; height: auto; }
+[hidden] { display: none !important; }
+.tagline { margin: 18px auto 0; max-width: 34ch; color: var(--grey); font-size: 17px; }
+
+.bar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 24px 20px 8px; }
+.chip { font: inherit; font-weight: 400; font-size: 15px; color: var(--grey); background: none; border: 1px solid var(--line); border-radius: 999px; padding: 8px 18px; cursor: pointer; }
+.chip:hover { color: var(--white); border-color: var(--grey); }
+.chip[aria-pressed="true"] { color: var(--black); background: var(--white); border-color: var(--white); }
+
+main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 14px; }
+@media (min-width: 760px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 40px 24px; } }
+@media (min-width: 1040px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+.item { display: flex; flex-direction: column; }
+.photo { aspect-ratio: 1; background: var(--panel); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo span { font-family: var(--script); font-size: 40px; color: #3a3a3a; }
+.item h2 { font-size: 18px; font-weight: 400; margin: 14px 0 0; }
+.price { color: var(--white); font-weight: 500; margin: 2px 0 0; }
+.desc { color: var(--grey); font-size: 15px; margin: 6px 0 14px; flex: 1; }
+.order { display: block; text-align: center; text-decoration: none; color: var(--white); border: 1px solid var(--white); padding: 10px 12px; font-weight: 400; font-size: 15px; }
+.order:hover { background: var(--white); color: var(--black); }
+.empty { text-align: center; color: var(--grey); padding: 48px 0; }
+
+footer { border-top: 1px solid var(--line); text-align: center; padding: 36px 20px 48px; color: var(--grey); font-size: 15px; }
+footer .sig { font-family: var(--script); font-size: 44px; color: var(--white); display: block; line-height: 1; margin-bottom: 8px; }
+footer a { color: var(--white); }
+
+:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1 class="wordmark">
+    <img id="logo" class="logo" alt="Silvique" hidden>
+    <span id="logoText">Silvique</span>
+  </h1>
+  <p class="tagline">Handmade & Curated Silver Jewellery</p>
+</header>
+
+<nav class="bar" id="filters" aria-label="Filter by category"></nav>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>Nothing in this category yet.</p>
+</main>
+
+<footer>
+  <span class="sig">Silvique</span>
+  Message us on <a id="footWa" href="#">WhatsApp</a> to order or ask about a piece.
+</footer>
+
+<script>
+/* ===== EDIT THESE ===== */
+const WHATSAPP = "254758814018";   // your number, country code first, no + or spaces
+const CURRENCY = "KES";
+const LOGO = "logo.png";           // path or URL to your logo image (PNG/SVG/WebP). Put it next to this file.
+                                   // If the file is missing, the page shows the "Silvique" script text instead.
+const PRODUCTS = [
+  // image: path or URL to a photo. Leave "" to show the placeholder.
+  { name: "Brass Flower Armcuff",       category: "Armcuffs",     price: 700, image: "images/A1.png", desc: "Handmade sterling silver band." },
+  { name: "Pointer Armcuff",       category: "Armcuffs",     price: 700, image: "images/A2.png", desc: "Stackable, hand-finished." },
+  { name: "Crystal silver Bellyring",     category: "Bellyrings",  price: 400, image: "images/B1.png", desc: "Small silver studs for every day." },
+  { name: "Red Gem Belly Button Piercing",  category: "Bellyrings",  price: 400, image: "images/B2.png", desc: "Light hoops, hand-formed." },
+  { name: "Cage Bracelet",    category: "Bracelets", price: 400, image: "images/H2.png", desc: "Fine silver chain, 45 cm." },
+  { name: "Green Beads Bracelet",  category: "Bracelets", price: 400, image: "images/H3.png", desc: "Hand-cut silver pendant." },
+  { name: "Embroidered Flower Bracelet",    category: "Bracelets", price: 400, image: "images/H4.png", desc: "Open cuff, fits most wrists." },
+  { name: "Double Swirl Brass Bracelet", category: "Bracelets", price: 400, image: "images/H5.png", desc: "Delicate link bracelet." },
+  { name: "Fingerprint Bracelet", category: "Bracelets", price: 400, image: "images/H6.png", desc: "Delicate link bracelet." },
+  { name: "Knot Bracelet", category: "Bracelets", price: 400, image: "images/H7.png", desc: "Delicate link bracelet." },
+  { name: "Circle Bracelet", category: "Bracelets", price: 400, image: "images/H8.png", desc: "Delicate link bracelet." },
+  { name: "Anchor & Rubber Earrings", category: "Earrings", price: 600, image: "images/E2.png", desc: "Delicate link bracelet." },
+  { name: "Two-point Ear-climber", category: "Earrings", price: 600, image: "images/E3.png", desc: "Delicate link bracelet." },
+  { name: "Baby Pearls", category: "Earrings", price: 600, image: "images/E4.png", desc: "Delicate link bracelet." },
+  { name: "Chunky Flower Vacuum-Plated Earrings", category: "Earrings", price: 600, image: "images/E5.png", desc: "Delicate link bracelet." },
+  { name: "Infinity Swirls", category: "Earrings", price: 400, image: "images/E6.png", desc: "Delicate link bracelet." },
+  { name: "Side Cross Ring", category: "Rings", price: 400, image: "images/F1.png", desc: "Delicate link bracelet." },
+  { name: "Lizard Double Ring", category: "Rings", price: 600, image: "images/F2.png", desc: "Delicate link bracelet." },
+  { name: "Crystal Masc Ring", category: "Rings", price: 400, image: "images/F3.png", desc: "Delicate link bracelet." },
+  { name: "Delicate Flower Ring", category: "Rings", price: 250, image: "images/F4.png", desc: "Delicate link bracelet." },
+  { name: "Tripple Dot Ring", category: "Rings", price: 250, image: "images/F5.png", desc: "Delicate link bracelet." },
+  { name: "Tiny Crystal Ring", category: "Rings", price: 250, image: "images/F6.png", desc: "Delicate link bracelet." },
+  { name: "Chained Ring", category: "Rings", price: 250, image: "images/F7.png", desc: "Delicate link bracelet." },
+  { name: "Yellow Gem Ring", category: "Rings", price: 250, image: "images/F8.png", desc: "Delicate link bracelet." },
+  { name: "Yin Yang Chunky Ring", category: "Rings", price: 600, image: "images/F9.png", desc: "Delicate link bracelet." }
+
+];
+/* ====================== */
+
+const grid = document.getElementById("grid");
+const empty = document.getElementById("empty");
+const bar = document.getElementById("filters");
+const categories = ["All", ...new Set(PRODUCTS.map(p => p.category))];
+let active = "All";
+
+const fmt = n => CURRENCY + " " + Number(n).toLocaleString("en-KE");
+const wa = text => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text);
+
+function renderChips() {
+  bar.innerHTML = "";
+  categories.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.textContent = c;
+    b.setAttribute("aria-pressed", String(c === active));
+    b.onclick = () => { active = c; renderChips(); renderGrid(); };
+    bar.appendChild(b);
+  });
+}
+
+function renderGrid() {
+  grid.innerHTML = "";
+  const list = PRODUCTS.filter(p => active === "All" || p.category === active);
+  empty.hidden = list.length > 0;
+  list.forEach(p => {
+    const el = document.createElement("article");
+    el.className = "item";
+    const photo = document.createElement("div");
+    photo.className = "photo";
+    if (p.image) {
+      const img = document.createElement("img");
+      img.src = p.image; img.alt = p.name; img.loading = "lazy";
+      photo.appendChild(img);
+    } else {
+      photo.innerHTML = "<span>Silvique</span>";
+    }
+    const h = document.createElement("h2"); h.textContent = p.name;
+    const pr = document.createElement("p"); pr.className = "price"; pr.textContent = fmt(p.price);
+    const d = document.createElement("p"); d.className = "desc"; d.textContent = p.desc;
+    const a = document.createElement("a");
+    a.className = "order"; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = "Order on WhatsApp";
+    a.href = wa("Hi Silvique, I'd like to order the " + p.name + " (" + fmt(p.price) + ").");
+    el.append(photo, h, pr, d, a);
+    grid.appendChild(el);
+  });
+}
+
+const logoEl = document.getElementById("logo");
+const logoText = document.getElementById("logoText");
+if (LOGO) {
+  logoEl.onload = () => { logoEl.hidden = false; logoText.hidden = true; };
+  logoEl.src = LOGO;
+}
+
+document.getElementById("footWa").href = wa("Hi Silvique, I have a question about your jewellery.");
+renderChips();
+renderGrid();
+</script>
+</body>
+</html>
