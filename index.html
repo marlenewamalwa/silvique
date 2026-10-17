@@ -32,6 +32,7 @@
   --muted: #666;        /* secondary text on white */
   --line: #e3e3e3;
   --tile: #fff;         /* photo background */
+  --photo-ratio: 3 / 4;   /* photo frame shape. 3 / 4 = tall, 4 / 5 = a bit shorter */
   --script: 'Brittany', 'Allura', cursive;
   --sans: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
@@ -67,12 +68,11 @@ body { margin: 0; background: var(--white); color: var(--ink); font-family: var(
 @media (min-width: 1040px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 
 .item { display: flex; flex-direction: column; }
-.photo { position: relative; aspect-ratio: 1; background: var(--tile); display: grid; place-items: center; overflow: hidden; }
-.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo { position: relative; aspect-ratio: var(--photo-ratio); background: var(--tile); display: grid; place-items: center; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .photo .ph { font-family: var(--script); font-size: 44px; color: #c4c4c4; }
 .item h2 { font-size: 18px; font-weight: 400; margin: 14px 0 0; line-height: 1.3; }
-.price { font-weight: 500; margin: 4px 0 0; }
-.desc { color: var(--muted); font-size: 15px; margin: 6px 0 14px; flex: 1; }
+.price { font-weight: 500; margin: 4px 0 14px; }
 .order { display: block; text-align: center; text-decoration: none; color: var(--white); background: var(--black); border: 1px solid var(--black); padding: 10px 12px; font-weight: 400; font-size: 15px; }
 .order:hover { background: var(--white); color: var(--black); }
 .empty { text-align: center; color: var(--muted); padding: 56px 0; }
@@ -147,33 +147,55 @@ const SHOW_SOLD = true;            // true: sold pieces stay visible (greyed, at
 
 const PRODUCTS = [
   // category: what the piece is.  origin: Handmade | Upcycled | Thrifted | New
-  // NOTE: every origin below is set to "Handmade" as a starting point. Change each one to the right value.
   // To mark a one-off as gone, add  soldOut: true  to that product, e.g.  { name: "...", ..., soldOut: true },
-  { name: "Brass Flower Armcuff",       category: "Armcuffs",   origin: "Handmade", price: 700, image: "images/A1.png", desc: "Handmade sterling silver band." },
-  { name: "Pointer Armcuff",            category: "Armcuffs",   origin: "Handmade", price: 700, image: "images/A2.png", desc: "Stackable, hand-finished." },
-  { name: "Crystal silver Bellyring",   category: "Bellyrings", origin: "Handmade", price: 400, image: "images/B1.png", desc: "Small silver studs for every day." },
-  { name: "Red Gem Belly Button Piercing", category: "Bellyrings", origin: "Handmade", price: 400, image: "images/B2.png", desc: "Light hoops, hand-formed." },
-  { name: "Cage Bracelet",              category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H2.png", desc: "Fine silver chain, 45 cm." },
-  { name: "Green Beads Bracelet",       category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H3.png", desc: "Hand-cut silver pendant." },
-  { name: "Embroidered Flower Bracelet", category: "Bracelets", origin: "Handmade", price: 400, image: "images/H4.png", desc: "Open cuff, fits most wrists." },
-  { name: "Double Swirl Brass Bracelet", category: "Bracelets", origin: "Handmade", price: 400, image: "images/H5.png", desc: "Delicate link bracelet." },
-  { name: "Fingerprint Bracelet",       category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H6.png", desc: "Delicate link bracelet." },
-  { name: "Knot Bracelet",              category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H7.png", desc: "Delicate link bracelet." },
-  { name: "Circle Bracelet",            category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H8.png", desc: "Delicate link bracelet." },
-  { name: "Anchor & Rubber Earrings",   category: "Earrings",   origin: "Handmade", price: 600, image: "images/E2.png", desc: "Delicate link bracelet." },
-  { name: "Two-point Ear-climber",      category: "Earrings",   origin: "Handmade", price: 600, image: "images/E3.png", desc: "Delicate link bracelet." },
-  { name: "Baby Pearls",                category: "Earrings",   origin: "Handmade", price: 600, image: "images/E4.png", desc: "Delicate link bracelet." },
-  { name: "Chunky Flower Vacuum-Plated Earrings", category: "Earrings", origin: "Handmade", price: 600, image: "images/E5.png", desc: "Delicate link bracelet." },
-  { name: "Infinity Swirls",            category: "Earrings",   origin: "Handmade", price: 400, image: "images/E6.png", desc: "Delicate link bracelet." },
-  { name: "Side Cross Ring",            category: "Rings",      origin: "Handmade", price: 400, image: "images/F1.png", desc: "Delicate link bracelet." },
-  { name: "Lizard Double Ring",         category: "Rings",      origin: "Handmade", price: 600, image: "images/F2.png", desc: "Delicate link bracelet." },
-  { name: "Crystal Masc Ring",          category: "Rings",      origin: "Handmade", price: 400, image: "images/F3.png", desc: "Delicate link bracelet." },
-  { name: "Delicate Flower Ring",       category: "Rings",      origin: "Handmade", price: 250, image: "images/F4.png", desc: "Delicate link bracelet." },
-  { name: "Tripple Dot Ring",           category: "Rings",      origin: "Handmade", price: 250, image: "images/F5.png", desc: "Delicate link bracelet." },
-  { name: "Tiny Crystal Ring",          category: "Rings",      origin: "Handmade", price: 250, image: "images/F6.png", desc: "Delicate link bracelet." },
-  { name: "Chained Ring",               category: "Rings",      origin: "Handmade", price: 250, image: "images/F7.png", desc: "Delicate link bracelet." },
- { name: "Yellow Gem Ring", category: "Rings", origin: "Handmade", price: 250, image: "images/F8.png", desc: "...", soldOut: true },
-  { name: "Yin Yang Chunky Ring",       category: "Rings",      origin: "Handmade", price: 600, image: "images/F9.png", desc: "Delicate link bracelet." }
+  { name: "Crystal Green & Blue Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 600, image: "images/E9.png" },
+  { name: "Black & Silver Spiral Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E10.png" },
+  { name: "Amethyst & Gems Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E11.png" },
+  { name: "Peach Spiral Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E12.png" },
+  { name: "Lavender Amethyst Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E13.png" },
+  { name: "Lilac Triple Earrings",       category: "Earrings",      origin: "Handmade", price: 400, image: "images/E14.png" },
+  { name: "Marble Onyx & Silver Spiral Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E15.png" },
+  { name: "Lavender Marble Seaside Charm Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H9.png" },
+   { name: "Brass Flower Armcuff",       category: "Armcuffs",   origin: "Handmade", price: 700, image: "images/A1.png" },
+  { name: "Pointer Armcuff",            category: "Armcuffs",   origin: "Handmade", price: 700, image: "images/A2.png" },
+  { name: "Crystal silver Bellyring",   category: "Bellyrings", origin: "Handmade", price: 400, image: "images/B1.png" },
+  { name: "Red Gem Belly Button Piercing", category: "Bellyrings", origin: "Handmade", price: 400, image: "images/B2.png" },
+  { name: "Chunky Flower Vacuum-Plated Earrings", category: "Earrings", origin: "New", price: 600, image: "images/E5.png" },
+  { name: "Infinity Swirls",            category: "Earrings",   origin: "Upcycled", price: 400, image: "images/E6.png" },
+  { name: "Side Cross Ring",            category: "Rings",      origin: "New", price: 400, image: "images/F1.png" },
+  { name: "Lizard Double Ring",         category: "Rings",      origin: "New", price: 600, image: "images/F2.png" },
+  { name: "Crystal Masc Ring",          category: "Rings",      origin: "New", price: 400, image: "images/F3.png"},
+  { name: "Delicate Flower Ring",       category: "Rings",      origin: "New", price: 250, image: "images/F4.png", soldOut: true },
+  { name: "Tripple Dot Ring",           category: "Rings",      origin: "New", price: 250, image: "images/F5.png", soldOut: true },
+  { name: "Tiny Crystal Ring",          category: "Rings",      origin: "New", price: 250, image: "images/F6.png", soldOut: true },
+  { name: "Chained Ring",               category: "Rings",      origin: "New", price: 250, image: "images/F7.png", soldOut: true },
+ { name: "Yellow Gem Ring", category: "Rings", origin: "New", price: 250, image: "images/F8.png", soldOut: true },
+  { name: "Yin Yang Chunky Ring",       category: "Rings",      origin: "Handmade", price: 600, image: "images/F9.png" },
+  { name: "Peach Crystal Earrings",  category: "Earrings",  origin: "Handmade", price: 500, image: "images/E16.png" },
+  { name: "Ocean Blue Shell Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H10.png" },
+  { name: "Pink & Silver Earrings",       category: "Earrings",      origin: "Handmade", price: 600, image: "images/E17.png" },
+  { name: "Red Shell Charm Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H11.png" },
+  { name: "Silver Chain with Marble Stone Pendant",       category: "Necklaces",      origin: "Handmade", price: 600, image: "images/N4.png" },
+  { name: "Silver Charm Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H12.png" },
+  { name: "Silver Spiral Ring with Blush Blossom",       category: "Rings",      origin: "Handmade", price: 400, image: "images/F10.png" },
+  { name: "Silver Spiral Ring with Jade Bead",       category: "Rings",      origin: "Handmade", price: 400, image: "images/F12.png" },
+  { name: "Silver Spiral Evil Eye Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E18.png" },
+  { name: "Pink & Red Starfish Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E19.png" },
+  { name: "Amber Wire-Wrapped Pendant with Shell Adjuster",       category: "Necklaces",      origin: "Handmade", price: 600, image: "images/F10.png" },
+  { name: "Amethyst Orbit Earrings",       category: "Earrings",      origin: "Handmade", price: 600, image: "images/E7.png" },
+  { name: "Sunset Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E8.png" },
+  { name: "Jade & Shell Necklace",       category: "Necklaces",      origin: "Handmade", price: 500, image: "images/N3.png" },
+
+  { name: "Cage Bracelet",              category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H2.png" },
+  { name: "Green Beads Bracelet",       category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H3.png" },
+  { name: "Embroidered Flower Bracelet", category: "Bracelets", origin: "Handmade", price: 400, image: "images/H4.png" },
+  { name: "Double Swirl Brass Bracelet", category: "Bracelets", origin: "Handmade", price: 400, image: "images/H5.png" },
+  { name: "Fingerprint Bracelet",       category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H6.png" },
+  { name: "Knot Bracelet",              category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H7.png" },
+  { name: "Circle Bracelet",            category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H8.png" },
+  { name: "Anchor & Rubber Earrings",   category: "Earrings",   origin: "Handmade", price: 600, image: "images/E2.png" },
+  { name: "Two-point Ear-climber",      category: "Earrings",   origin: "Handmade", price: 600, image: "images/E3.png" },
+  { name: "Baby Pearls",                category: "Earrings",   origin: "Handmade", price: 600, image: "images/E4.png" }
 ];
 /* ====================== */
 
@@ -240,7 +262,6 @@ function render() {
 
     const h = document.createElement("h2"); h.textContent = p.name;
     const pr = document.createElement("p"); pr.className = "price"; pr.textContent = fmt(p.price);
-    const d = document.createElement("p"); d.className = "desc"; d.textContent = p.desc;
     let a;
     if (p.soldOut) {
       a = document.createElement("span");
@@ -252,7 +273,7 @@ function render() {
       a.textContent = "Order on WhatsApp";
       a.href = wa("Hi Silvique, I'd like to order the " + p.name + " (" + fmt(p.price) + ").");
     }
-    el.append(photo, h, pr, d, a);
+    el.append(photo, h, pr, a);
     grid.appendChild(el);
   });
 }
