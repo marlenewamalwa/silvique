@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="p:domain_verify" content="192e09d14348fe611eb479e84d32cdb9"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Silvique | Handmade silver jewellery</title>
 <meta name="description" content="Handmade &amp; curated silver jewellery from Kenya. Rings, earrings, bracelets and more. Order on WhatsApp.">
@@ -73,6 +74,12 @@ body { margin: 0; background: var(--white); color: var(--ink); font-family: var(
 .photo .ph { font-family: var(--script); font-size: 44px; color: #c4c4c4; }
 .item h2 { font-size: 18px; font-weight: 400; margin: 14px 0 0; line-height: 1.3; }
 .price { font-weight: 500; margin: 4px 0 14px; }
+.opts { display: grid; gap: 10px; margin: -2px 0 14px; }
+.opt-label { display: block; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.opt-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.opt-chip { font: inherit; font-weight: 400; font-size: 15px; color: var(--ink); background: var(--white); border: 1px solid #cfcfcf; border-radius: 999px; padding: 3px 12px; cursor: pointer; }
+.opt-chip:hover { border-color: var(--ink); }
+.opt-chip[aria-pressed="true"] { color: var(--white); background: var(--black); border-color: var(--black); }
 .order { display: block; text-align: center; text-decoration: none; color: var(--white); background: var(--black); border: 1px solid var(--black); padding: 10px 12px; font-weight: 400; font-size: 15px; }
 .order:hover { background: var(--white); color: var(--black); }
 .empty { text-align: center; color: var(--muted); padding: 56px 0; }
@@ -80,7 +87,7 @@ body { margin: 0; background: var(--white); color: var(--ink); font-family: var(
 /* Sold out (one-off pieces) */
 .item.sold .photo { opacity: .45; }
 .item.sold h2, .item.sold .price { color: var(--muted); }
-.order.soldout, .order.soldout:hover { background: var(--white); color: var(--muted); border-color: #cfcfcf; cursor: default; }
+.order.soldout, .order.soldout:hover, .order.pending, .order.pending:hover { background: var(--white); color: var(--muted); border-color: #cfcfcf; cursor: default; }
 
 /* Phones: one scrolling row per filter group, shorter hero so products show sooner */
 @media (max-width: 759px) {
@@ -143,11 +150,21 @@ const CURRENCY = "KES";
 // Display order of the filter chips. Anything not listed here still appears, after these.
 const PIECE_ORDER  = ["Rings", "Earrings", "Necklaces", "Bracelets", "Armcuffs", "Bellyrings"];
 const ORIGIN_ORDER = ["Handmade", "Upcycled", "Thrifted", "New"];
+// Colour / size choices for whole groups of products. A rule applies to every product that matches
+// its category and/or origin, including ones you add later. A product's own  colours:  or  sizes:
+// wins over a rule, and  colours: []  switches the choice off for that one product.
+const VARIETIES = [
+  { category: "Bracelets", origin: "Handmade", colours: ["Red", "Yellow", "Purple"] },   // placeholder colours: put yours here
+];
 const SHOW_SOLD = true;            // true: sold pieces stay visible (greyed, at the end). false: hide them.
 
 const PRODUCTS = [
   // category: what the piece is.  origin: Handmade | Upcycled | Thrifted | New
   // To mark a one-off as gone, add  soldOut: true  to that product, e.g.  { name: "...", ..., soldOut: true },
+  // Colour / size for a single product (customers must pick before the order button works):
+  //   colours: ["Red", "Yellow", "Purple"],  sizes: ["6", "7", "8"]
+  // To swap the photo when a colour is picked, use objects instead of plain names:
+  //   colours: [{ name: "Red", image: "images/H1-red.png" }, { name: "Yellow", image: "images/H1-yellow.png" }]
   { name: "Crystal Green & Blue Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 600, image: "images/E9.png" },
   { name: "Black & Silver Spiral Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E10.png" },
   { name: "Amethyst & Gems Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E11.png" },
@@ -201,6 +218,12 @@ const PRODUCTS = [
 
 const $ = id => document.getElementById(id);
 const fmt = n => CURRENCY + " " + Number(n).toLocaleString("en-KE");
+const norm = list => (list || []).map(o => typeof o === "string" ? { name: o } : o);
+const optionsFor = (p, key) => {
+  if (p[key]) return p[key];
+  const rule = VARIETIES.find(r => r[key] && (!r.category || r.category === p.category) && (!r.origin || r.origin === p.origin));
+  return rule ? rule[key] : [];
+};
 const wa = text => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text);
 
 // Chip order: preferred order first, then any new values you add to products.
@@ -251,10 +274,14 @@ function render() {
     const photo = document.createElement("div");
     photo.className = "photo";
     const placeholder = () => { photo.innerHTML = '<span class="ph">Silvique</span>'; };
+    let img = null;
     if (p.image) {
-      const img = document.createElement("img");
+      img = document.createElement("img");
       img.src = p.image; img.alt = p.name; img.loading = "lazy";
-      img.onerror = () => { img.remove(); placeholder(); };
+      img.onerror = () => {
+        if (img.getAttribute("src") !== p.image) img.src = p.image;   // a colour photo is missing: go back to the main one
+        else { img.remove(); img = null; placeholder(); }
+      };
       photo.appendChild(img);
     } else {
       placeholder();
@@ -262,7 +289,7 @@ function render() {
 
     const h = document.createElement("h2"); h.textContent = p.name;
     const pr = document.createElement("p"); pr.className = "price"; pr.textContent = fmt(p.price);
-    let a;
+    let a, opts = null;
     if (p.soldOut) {
       a = document.createElement("span");
       a.className = "order soldout"; a.textContent = "Sold out";
@@ -270,10 +297,54 @@ function render() {
     } else {
       a = document.createElement("a");
       a.className = "order"; a.target = "_blank"; a.rel = "noopener";
-      a.textContent = "Order on WhatsApp";
-      a.href = wa("Hi Silvique, I'd like to order the " + p.name + " (" + fmt(p.price) + ").");
+
+      // Colour / size choices (only shown if the product has them)
+      const groups = [["Colour", norm(optionsFor(p, "colours"))], ["Size", norm(optionsFor(p, "sizes"))]].filter(g => g[1].length);
+      const pick = {};
+      groups.forEach(([label, list]) => { pick[label] = list.length === 1 ? list[0] : null; });
+
+      const refresh = () => {
+        const missing = groups.filter(([label]) => !pick[label]).map(([label]) => label.toLowerCase());
+        if (missing.length) {
+          a.classList.add("pending");
+          a.removeAttribute("href");
+          a.setAttribute("aria-disabled", "true");
+          a.textContent = missing.length === 2 ? "Choose colour and size" : "Choose a " + missing[0];
+        } else {
+          const chosen = groups.map(([label]) => label + ": " + pick[label].name);
+          a.classList.remove("pending");
+          a.removeAttribute("aria-disabled");
+          a.textContent = "Order on WhatsApp";
+          a.href = wa("Hi Silvique, I'd like to order the " + p.name + (chosen.length ? ", " + chosen.join(", ") : "") + " (" + fmt(p.price) + ").");
+        }
+      };
+
+      if (groups.length) {
+        opts = document.createElement("div");
+        opts.className = "opts";
+        groups.forEach(([label, list]) => {
+          const row = document.createElement("div");
+          const lab = document.createElement("span"); lab.className = "opt-label"; lab.textContent = label;
+          const chips = document.createElement("div"); chips.className = "opt-chips";
+          list.forEach(o => {
+            const b = document.createElement("button");
+            b.type = "button"; b.className = "opt-chip"; b.textContent = o.name;
+            b.setAttribute("aria-pressed", String(pick[label] === o));
+            b.onclick = () => {
+              pick[label] = o;
+              chips.querySelectorAll(".opt-chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+              if (img) img.src = o.image || p.image;   // colours without their own photo show the main one
+              refresh();
+            };
+            chips.appendChild(b);
+          });
+          row.append(lab, chips);
+          opts.appendChild(row);
+        });
+      }
+      refresh();
     }
-    el.append(photo, h, pr, a);
+    if (opts) el.append(photo, h, pr, opts, a); else el.append(photo, h, pr, a);
     grid.appendChild(el);
   });
 }
