@@ -2,356 +2,251 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="p:domain_verify" content="192e09d14348fe611eb479e84d32cdb9"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Silvique | Handmade silver jewellery</title>
-<meta name="description" content="Handmade &amp; curated silver jewellery from Kenya. Rings, earrings, bracelets and more. Order on WhatsApp.">
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='47' font-size='44' text-anchor='middle' fill='%23fff' font-family='Georgia,serif' font-style='italic'%3ES%3C/text%3E%3C/svg%3E">
-<!-- Link preview (WhatsApp, Instagram, etc). After you deploy, replace the two URLs below with your real
-     site address, and add a 1200x630 image named preview.jpg (under ~300KB) next to index.html. -->
+<title>Silvique | Handmade earrings</title>
+<meta name="description" content="Handmade earrings from Kenya, made one pair at a time.">
+<meta property="og:title" content="Silvique | Handmade earrings">
+<meta property="og:description" content="Handmade earrings from Kenya, made one pair at a time.">
+<meta property="og:image" content="https://YOUR-SITE/preview.jpg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Silvique | Handmade silver jewellery">
-<meta property="og:description" content="Handmade &amp; curated silver jewellery from Kenya. Order on WhatsApp.">
-<meta property="og:url" content="https://USERNAME.github.io/REPO/">
-<meta property="og:image" content="https://USERNAME.github.io/REPO/preview.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖤</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* BRAND FONT: Brittany is a Canva font, so it can't load from a CDN.
-   To use it, export the font file and uncomment (host it, or embed as a data: URI):
-@font-face { font-family: 'Brittany'; src: url('brittany.woff2') format('woff2'); font-display: swap; }
-*/
-:root {
-  box-sizing: border-box;
-  --black: #000;
-  --white: #fff;
-  --grey: #a3a3a3;      /* secondary text on black */
-  --ink: #0a0a0a;       /* text on white */
-  --muted: #666;        /* secondary text on white */
-  --line: #e3e3e3;
-  --tile: #fff;         /* photo background */
-  --photo-ratio: 3 / 4;   /* photo frame shape. 3 / 4 = tall, 4 / 5 = a bit shorter */
-  --script: 'Brittany', 'Allura', cursive;
-  --sans: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
-}
-html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-*, *::before, *::after { box-sizing: inherit; }
-body { margin: 0; background: var(--white); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-[hidden] { display: none !important; }
+:root{--ink:#000;--paper:#fff;--mute:#8c8c8c;--line:#2a2a2a;--script:"Mrs Saint Delafield","Brush Script MT",cursive;--sans:"Jost",system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+section{padding:110px 0}
+.light{--mute:#6b6b6b;background:var(--paper);color:var(--ink)}
+h2{font-weight:300;font-size:clamp(30px,4.4vw,52px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em}
+.sub{max-width:46ch;color:var(--mute);margin:0 0 32px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.btn{display:inline-block;padding:15px 34px;border:1px solid currentColor;border-radius:99px;text-decoration:none;font-size:15px;letter-spacing:.03em;transition:background .25s,color .25s}
+.btn:hover,.btn:focus-visible{background:var(--paper);color:var(--ink)}
+:focus-visible{outline:2px solid #9a9a9a;outline-offset:3px}
 
-/* ---------- Hero ---------- */
-.hero { text-align: center; padding: calc(80px + env(safe-area-inset-top, 0px)) 20px 72px; background: var(--white); color: var(--ink); }
-.tagline { margin: 20px auto 0; max-width: 34ch; color: var(--muted); font-size: 17px; letter-spacing: .02em; }
-.wordmark { font-family: var(--script); font-weight: 400; font-size: clamp(96px, 26vw, 260px); line-height: .9; margin: 0; }
+nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:calc(18px + env(safe-area-inset-top,0px)) 28px 18px;mix-blend-mode:difference;color:#fff;font-size:14px}
+nav a{text-decoration:none;margin-left:26px}
+nav .logo{font-family:var(--script);font-size:34px;margin:0;line-height:1}
 
-/* ---------- White shop ---------- */
-.shop { background: var(--white); color: var(--ink); }
-.shop-inner { max-width: 1180px; margin: 0 auto; padding: 40px 16px 72px; }
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:90px 28px 64px;position:relative;overflow:hidden}
+.hero-img{position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,#4a4a4a,#101010 70%);display:flex;align-items:center;justify-content:center;color:#777;font-size:13px}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(0,0,0,.7));pointer-events:none}
+.hero .btn{position:relative;z-index:1}
 
-.filters { display: grid; gap: 18px; padding-bottom: 8px; margin-bottom: 24px; }
-.group { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.label { font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { font: inherit; font-weight: 400; font-size: 15px; color: var(--ink); background: var(--white); border: 1px solid #cfcfcf; border-radius: 999px; padding: 7px 16px; cursor: pointer; }
-.chip .n { color: var(--muted); font-size: 13px; margin-left: 4px; }
-.chip:hover:not(:disabled) { border-color: var(--ink); }
-.chip[aria-pressed="true"] { color: var(--white); background: var(--black); border-color: var(--black); }
-.chip[aria-pressed="true"] .n { color: #bdbdbd; }
-.chip:disabled { opacity: .35; cursor: default; }
-.status { display: flex; align-items: center; gap: 14px; min-height: 28px; color: var(--muted); font-size: 15px; }
-.clear { font: inherit; font-size: 15px; color: var(--ink); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.frow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+#filters{margin-bottom:40px}
+.pill{font:inherit;font-size:14px;padding:8px 18px;border:1px solid #000;background:transparent;color:#000;border-radius:99px;cursor:pointer}
+.pill.on{background:#000;color:#fff}
 
-.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 14px; }
-@media (min-width: 760px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 44px 24px; } }
-@media (min-width: 1040px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 24px}
+.card .ph{aspect-ratio:4/5;background:radial-gradient(circle at 40% 35%,#d9d9d9,#8a8a8a);border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#555;font-size:13px}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.card:hover .ph img{transform:scale(1.04)}
+.card h3{font-weight:400;font-size:18px;margin:16px 0 0}
+.card .tag{color:var(--mute);font-size:13px;margin-bottom:8px}
+.card .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mute);font-size:15px}
+.card .row a{background:#25D366;color:#04210e;font-weight:500;font-size:14px;padding:9px 16px;border-radius:99px;text-decoration:none;transition:background .2s}
+.card .row a:hover,.card .row a:focus-visible{background:#1ebe5b}
+.card.sold .ph{opacity:.4}
 
-.item { display: flex; flex-direction: column; }
-.photo { position: relative; aspect-ratio: var(--photo-ratio); background: var(--tile); display: grid; place-items: center; overflow: hidden; }
-.photo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.photo .ph { font-family: var(--script); font-size: 44px; color: #c4c4c4; }
-.item h2 { font-size: 18px; font-weight: 400; margin: 14px 0 0; line-height: 1.3; }
-.price { font-weight: 500; margin: 4px 0 14px; }
-.opts { display: grid; gap: 10px; margin: -2px 0 14px; }
-.opt-label { display: block; font-size: 12px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-.opt-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.opt-chip { font: inherit; font-weight: 400; font-size: 15px; color: var(--ink); background: var(--white); border: 1px solid #cfcfcf; border-radius: 999px; padding: 3px 12px; cursor: pointer; }
-.opt-chip:hover { border-color: var(--ink); }
-.opt-chip[aria-pressed="true"] { color: var(--white); background: var(--black); border-color: var(--black); }
-.order { display: block; text-align: center; text-decoration: none; color: var(--white); background: var(--black); border: 1px solid var(--black); padding: 10px 12px; font-weight: 400; font-size: 15px; }
-.order:hover { background: var(--white); color: var(--black); }
-.empty { text-align: center; color: var(--muted); padding: 56px 0; }
+.story{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.story .ph2{aspect-ratio:4/5;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:13px;overflow:hidden}
+.story .ph2 img{width:100%;height:100%;object-fit:cover}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
+.facts b{display:block;font-weight:400;font-size:20px}
+.facts span{color:var(--mute);font-size:15px}
 
-/* Sold out (one-off pieces) */
-.item.sold .photo { opacity: .45; }
-.item.sold h2, .item.sold .price { color: var(--muted); }
-.order.soldout, .order.soldout:hover, .order.pending, .order.pending:hover { background: var(--white); color: var(--muted); border-color: #cfcfcf; cursor: default; }
+.faq{max-width:760px}
+details{border-top:1px solid var(--line);padding:20px 0}
+.light details{border-color:#ddd}
+details:last-of-type{border-bottom:1px solid #ddd}
+summary{cursor:pointer;font-size:19px;list-style:none;display:flex;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"}
+details[open] summary::after{content:"–"}
+details p{color:var(--mute);margin:12px 0 0;max-width:56ch}
 
-/* Phones: one scrolling row per filter group, shorter hero so products show sooner */
-@media (max-width: 759px) {
-  .hero { padding: calc(36px + env(safe-area-inset-top, 0px)) 20px 24px; }
-  .tagline { margin-top: 10px; font-size: 15px; }
-  .shop-inner { padding-top: 16px; }
-  .filters { gap: 14px; }
-  .chips { flex-wrap: nowrap; overflow-x: auto; margin: 0 -16px; padding: 2px 16px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .chips::-webkit-scrollbar { display: none; }
-  .chip { flex: none; white-space: nowrap; }
-}
+footer{padding:90px 0 120px;text-align:center}
+footer .big{font-family:var(--script);font-size:clamp(90px,18vw,220px);line-height:.85;margin:0 0 30px}
+footer p{color:var(--mute);margin:6px 0}
 
-/* ---------- Black footer ---------- */
-footer { text-align: center; padding: 44px 20px calc(56px + env(safe-area-inset-bottom, 0px)); background: var(--black); color: var(--grey); font-size: 15px; }
-footer .sig { font-family: var(--script); font-size: 56px; color: var(--white); display: block; line-height: 1; margin-bottom: 10px; }
-footer a { color: var(--white); }
+.float{position:fixed;right:max(18px,env(safe-area-inset-right,0px));z-index:30;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid #444;box-shadow:0 6px 24px rgba(0,0,0,.35);transition:transform .2s}
+.float:hover,.float:focus-visible{transform:scale(1.08)}
+.float svg{width:26px;height:26px}
+.wa{bottom:calc(20px + env(safe-area-inset-bottom,0px));background:#25D366;border-color:#25D366;color:#fff}
+.ig{bottom:calc(86px + env(safe-area-inset-bottom,0px));background:#000;color:#fff}
 
-:focus-visible { outline: 2px solid #2b6cff; outline-offset: 3px; }
+@media(max-width:820px){section{padding:80px 0}.grid{grid-template-columns:1fr 1fr;gap:32px 14px}.story{grid-template-columns:1fr;gap:40px}nav a:not(.logo){display:none}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <h1 class="wordmark">Silvique</h1>
-  <p class="tagline">Handmade &amp; Curated Silver Jewellery</p>
+<nav><a class="logo" href="#top">Silvique</a><div><a href="#shop">Shop</a><a href="#story">Story</a><a href="#faq">FAQ</a></div></nav>
+
+<header class="hero" id="top">
+  <div class="hero-img" id="heroImg">Hero photo goes here</div>
+  <h1 class="sr">Silvique, handmade earrings</h1>
+  <a class="btn" href="#shop">Shop the earrings</a>
 </header>
 
-<div class="shop">
-  <div class="shop-inner">
-    <section class="filters" aria-label="Filters">
-      <div class="group">
-        <span class="label" id="lblPiece">Piece</span>
-        <div class="chips" id="pieceChips" role="group" aria-labelledby="lblPiece"></div>
-      </div>
-      <div class="group">
-        <span class="label" id="lblOrigin">Origin</span>
-        <div class="chips" id="originChips" role="group" aria-labelledby="lblOrigin"></div>
-      </div>
-      <div class="status">
-        <span id="count" aria-live="polite"></span>
-        <button class="clear" id="clear" hidden>Clear filters</button>
-      </div>
-    </section>
-
+<section class="light" id="shop">
+  <div class="wrap">
+    <h2>The earrings</h2>
+    <p class="sub">Every pair is made by hand in Kenya. Tap order and we’ll finish up on WhatsApp.</p>
+    <div id="filters"></div>
     <div class="grid" id="grid"></div>
-    <p class="empty" id="empty" hidden>Nothing matches those filters.</p>
   </div>
-</div>
+</section>
+
+<section id="story">
+  <div class="wrap story">
+    <div class="ph2" id="storyImg">Your photo here</div>
+    <div>
+      <h2>Small, slow and made to be noticed.</h2>
+      <p style="color:var(--mute);max-width:46ch">Silvique started with silver and a love for pieces that feel personal. Now it’s earrings only: pearls, stones, shells and charms, strung and finished by hand.</p>
+      <div class="facts">
+        <div><b>Handmade</b><span>Each pair made to order.</span></div>
+        <div><b>Delivered</b><span>Across Kenya.</span></div>
+        <div><b>Gift ready</b><span>Packed with care.</span></div>
+        <div><b>Easy orders</b><span>Just message us.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="faq">
+  <div class="wrap faq">
+    <h2>Good to know</h2>
+    <p class="sub">Quick answers before you order.</p>
+    <details><summary>How do I order?</summary><p>Tap Order on WhatsApp on any pair and send the message. We’ll confirm availability, payment and delivery there.</p></details>
+    <details><summary>How do I pay?</summary><p>Add your payment options here, for example M-Pesa.</p></details>
+    <details><summary>Do you deliver?</summary><p>Add your delivery areas, fees and timing here.</p></details>
+    <details><summary>Can I ask for a custom pair?</summary><p>Message us a photo of what you have in mind and we’ll tell you what’s possible.</p></details>
+    <details><summary>How do I look after my earrings?</summary><p>Keep them dry and away from perfume, so the finish lasts.</p></details>
+  </div>
+</section>
 
 <footer>
-  <span class="sig">Silvique</span>
-  Message us on <a id="footWa" href="#">WhatsApp</a> to order or ask about a piece.
+  <div class="wrap">
+    <p class="big">Silvique</p>
+    <p>Handmade earrings, Kenya</p>
+    <p><a href="#" id="waLink2">WhatsApp</a> &nbsp;·&nbsp; <a href="#" id="igLink2" target="_blank" rel="noopener">Instagram</a></p>
+    <p style="margin-top:36px;font-size:13px">© <span id="yr"></span> Silvique</p>
+  </div>
 </footer>
 
+<a class="float ig" id="igFloat" href="#" target="_blank" rel="noopener" aria-label="Silvique on Instagram">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>
+</a>
+<a class="float wa" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Order on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.600 15.100L2 22l5-1.300A10 10 0 1 0 12 2Zm5.800 14.200c-.2.700-1.300 1.300-1.800 1.300-.5.100-1 .2-3.300-.7-2.800-1.100-4.500-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500.2.600.8 2 .9 2.100.1.100.1.300 0 .5-.1.200-.1.300-.3.500l-.4.500c-.1.100-.3.300-.1.600.2.300.7 1.200 1.500 1.900 1 .9 1.900 1.200 2.200 1.300.3.100.4.100.6-.1.200-.2.700-.8.900-1.100.2-.3.400-.2.600-.1l2 1c.3.100.5.200.5.300.1.100.1.700-.1 1.400Z"/></svg>
+</a>
+
 <script>
-/* ===== EDIT THESE ===== */
-const WHATSAPP = "254758814018";   // your number, country code first, no + or spaces
-const CURRENCY = "KES";
+/* ====== EDIT THESE ====== */
+const WA = "254700000000";     // WhatsApp number, country code first, no + or spaces
+const IG = "silvique";         // Instagram handle
+const SHEET = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFof0hKRHRAdcKPTRLz0V51KRM445nL0sGRYQtgPzeQGlCYG5pA16t9qlXaCAzyVYMg40eE_af6usi/pub?output=csv";  // file next to index.html, or a Google Sheets "publish to web" CSV link
+const IMG_FOLDER = "images/";  // where your photos live
+const HERO_IMG = "";           // e.g. "images/hero.jpg"
+const STORY_IMG = "";          // e.g. "images/story.jpg"
+/* ======================== */
 
-// Display order of the filter chips. Anything not listed here still appears, after these.
-const PIECE_ORDER  = ["Rings", "Earrings", "Necklaces", "Bracelets", "Armcuffs", "Bellyrings"];
-const ORIGIN_ORDER = ["Handmade", "Upcycled", "Thrifted", "New"];
-// Colour / size choices for whole groups of products. A rule applies to every product that matches
-// its category and/or origin, including ones you add later. A product's own  colours:  or  sizes:
-// wins over a rule, and  colours: []  switches the choice off for that one product.
-const VARIETIES = [
-  { category: "Bracelets", origin: "Handmade", colours: ["Red", "Yellow", "Purple"] },   // placeholder colours: put yours here
-];
-const SHOW_SOLD = true;            // true: sold pieces stay visible (greyed, at the end). false: hide them.
-
-const PRODUCTS = [
-  // category: what the piece is.  origin: Handmade | Upcycled | Thrifted | New
-  // To mark a one-off as gone, add  soldOut: true  to that product, e.g.  { name: "...", ..., soldOut: true },
-  // Colour / size for a single product (customers must pick before the order button works):
-  //   colours: ["Red", "Yellow", "Purple"],  sizes: ["6", "7", "8"]
-  // To swap the photo when a colour is picked, use objects instead of plain names:
-  //   colours: [{ name: "Red", image: "images/H1-red.png" }, { name: "Yellow", image: "images/H1-yellow.png" }]
-  { name: "Crystal Green & Blue Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 600, image: "images/E9.png" },
-  { name: "Black & Silver Spiral Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E10.png" },
-  { name: "Amethyst & Gems Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E11.png" },
-  { name: "Peach Spiral Dangle Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E12.png" },
-  { name: "Lavender Amethyst Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E13.png" },
-  { name: "Lilac Triple Earrings",       category: "Earrings",      origin: "Handmade", price: 400, image: "images/E14.png" },
-  { name: "Marble Onyx & Silver Spiral Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E15.png" },
-  { name: "Lavender Marble Seaside Charm Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H9.png" },
-   { name: "Brass Flower Armcuff",       category: "Armcuffs",   origin: "Handmade", price: 700, image: "images/A1.png" },
-  { name: "Pointer Armcuff",            category: "Armcuffs",   origin: "Handmade", price: 700, image: "images/A2.png" },
-  { name: "Crystal silver Bellyring",   category: "Bellyrings", origin: "Handmade", price: 400, image: "images/B1.png" },
-  { name: "Red Gem Belly Button Piercing", category: "Bellyrings", origin: "Handmade", price: 400, image: "images/B2.png" },
-  { name: "Chunky Flower Vacuum-Plated Earrings", category: "Earrings", origin: "New", price: 600, image: "images/E5.png" },
-  { name: "Infinity Swirls",            category: "Earrings",   origin: "Upcycled", price: 400, image: "images/E6.png" },
-  { name: "Side Cross Ring",            category: "Rings",      origin: "New", price: 400, image: "images/F1.png" },
-  { name: "Lizard Double Ring",         category: "Rings",      origin: "New", price: 600, image: "images/F2.png" },
-  { name: "Crystal Masc Ring",          category: "Rings",      origin: "New", price: 400, image: "images/F3.png"},
-  { name: "Delicate Flower Ring",       category: "Rings",      origin: "New", price: 250, image: "images/F4.png", soldOut: true },
-  { name: "Tripple Dot Ring",           category: "Rings",      origin: "New", price: 250, image: "images/F5.png", soldOut: true },
-  { name: "Tiny Crystal Ring",          category: "Rings",      origin: "New", price: 250, image: "images/F6.png", soldOut: true },
-  { name: "Chained Ring",               category: "Rings",      origin: "New", price: 250, image: "images/F7.png", soldOut: true },
- { name: "Yellow Gem Ring", category: "Rings", origin: "New", price: 250, image: "images/F8.png", soldOut: true },
-  { name: "Yin Yang Chunky Ring",       category: "Rings",      origin: "Handmade", price: 600, image: "images/F9.png" },
-  { name: "Peach Crystal Earrings",  category: "Earrings",  origin: "Handmade", price: 500, image: "images/E16.png" },
-  { name: "Ocean Blue Shell Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H10.png" },
-  { name: "Pink & Silver Earrings",       category: "Earrings",      origin: "Handmade", price: 600, image: "images/E17.png" },
-  { name: "Red Shell Charm Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H11.png" },
-  { name: "Silver Chain with Marble Stone Pendant",       category: "Necklaces",      origin: "Handmade", price: 600, image: "images/N4.png" },
-  { name: "Silver Charm Bracelet",       category: "Bracelets",      origin: "Handmade", price: 400, image: "images/H12.png" },
-  { name: "Silver Spiral Ring with Blush Blossom",       category: "Rings",      origin: "Handmade", price: 400, image: "images/F10.png" },
-  { name: "Silver Spiral Ring with Jade Bead",       category: "Rings",      origin: "Handmade", price: 400, image: "images/F12.png" },
-  { name: "Silver Spiral Evil Eye Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E18.png" },
-  { name: "Pink & Red Starfish Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E19.png" },
-  { name: "Amber Wire-Wrapped Pendant with Shell Adjuster",       category: "Necklaces",      origin: "Handmade", price: 600, image: "images/F10.png" },
-  { name: "Amethyst Orbit Earrings",       category: "Earrings",      origin: "Handmade", price: 600, image: "images/E7.png" },
-  { name: "Sunset Earrings",       category: "Earrings",      origin: "Handmade", price: 500, image: "images/E8.png" },
-  { name: "Jade & Shell Necklace",       category: "Necklaces",      origin: "Handmade", price: 500, image: "images/N3.png" },
-
-  { name: "Cage Bracelet",              category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H2.png" },
-  { name: "Green Beads Bracelet",       category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H3.png" },
-  { name: "Embroidered Flower Bracelet", category: "Bracelets", origin: "Handmade", price: 400, image: "images/H4.png" },
-  { name: "Double Swirl Brass Bracelet", category: "Bracelets", origin: "Handmade", price: 400, image: "images/H5.png" },
-  { name: "Fingerprint Bracelet",       category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H6.png" },
-  { name: "Knot Bracelet",              category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H7.png" },
-  { name: "Circle Bracelet",            category: "Bracelets",  origin: "Handmade", price: 400, image: "images/H8.png" },
-  { name: "Anchor & Rubber Earrings",   category: "Earrings",   origin: "Handmade", price: 600, image: "images/E2.png" },
-  { name: "Two-point Ear-climber",      category: "Earrings",   origin: "Handmade", price: 600, image: "images/E3.png" },
-  { name: "Baby Pearls",                category: "Earrings",   origin: "Handmade", price: 600, image: "images/E4.png" }
-];
-/* ====================== */
+/* Sample rows, used only if products.csv can't be loaded (e.g. opening the file directly) */
+const FALLBACK_CSV = `name,price,colour,pairing,image,sold
+Cowrie Drop,450,White;Purple,Mismatched,cowrie-drop.jpg,
+Amethyst Chip,500,Purple,Matched,amethyst-chip.jpg,
+Baroque Pearl,600,White;Purple,Matched,baroque-pearl.jpg,
+Moon Quartz,500,White,Matched,moon-quartz.jpg,
+Starfish Huggie,450,Blue;Pink,Mismatched,starfish-huggie.jpg,
+Charm Hoop,550,Silver,Matched,charm-hoop.jpg,`;
 
 const $ = id => document.getElementById(id);
-const fmt = n => CURRENCY + " " + Number(n).toLocaleString("en-KE");
-const norm = list => (list || []).map(o => typeof o === "string" ? { name: o } : o);
-const optionsFor = (p, key) => {
-  if (p[key]) return p[key];
-  const rule = VARIETIES.find(r => r[key] && (!r.category || r.category === p.category) && (!r.origin || r.origin === p.origin));
-  return rule ? rule[key] : [];
-};
-const wa = text => "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(text);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const wa = t => `https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 
-// Chip order: preferred order first, then any new values you add to products.
-const order = (preferred, key) => {
-  const present = [...new Set(PRODUCTS.map(p => p[key]).filter(Boolean))];
-  return [...preferred.filter(v => present.includes(v)), ...present.filter(v => !preferred.includes(v))];
-};
-const PIECES  = order(PIECE_ORDER, "category");
-const ORIGINS = order(ORIGIN_ORDER, "origin");
+$("waFloat").href = wa("Hi Silvique, I’d like to ask about your earrings.");
+$("waLink2").href = wa("Hi Silvique!");
+$("igFloat").href = $("igLink2").href = `https://instagram.com/${IG}`;
+$("yr").textContent = new Date().getFullYear();
+if (HERO_IMG) $("heroImg").innerHTML = `<img src="${HERO_IMG}" alt="Silvique handmade earrings">`;
+if (STORY_IMG) $("storyImg").innerHTML = `<img src="${STORY_IMG}" alt="Silvique earrings">`;
 
-const state = { piece: "All", origin: "All" };
-const matches = (p, piece, origin) =>
-  (SHOW_SOLD || !p.soldOut) &&
-  (piece === "All" || p.category === piece) && (origin === "All" || p.origin === origin);
-
-function makeChips(host, values, key, other) {
-  host.innerHTML = "";
-  ["All", ...values].forEach(v => {
-    // Count what you'd get if you picked this chip, given the other filter.
-    const n = PRODUCTS.filter(p => key === "piece" ? matches(p, v, state.origin) : matches(p, state.piece, v)).length;
-    const b = document.createElement("button");
-    b.className = "chip";
-    b.setAttribute("aria-pressed", String(state[key] === v));
-    b.disabled = n === 0 && state[key] !== v;
-    b.innerHTML = v + '<span class="n">' + n + "</span>";
-    b.onclick = () => { state[key] = v; render(); };
-    host.appendChild(b);
-  });
+function parseCSV(t){
+  const rows = []; let r = [], c = "", q = false;
+  for (let i = 0; i < t.length; i++){
+    const ch = t[i];
+    if (q){ if (ch === '"'){ if (t[i+1] === '"'){ c += '"'; i++; } else q = false; } else c += ch; }
+    else if (ch === '"') q = true;
+    else if (ch === ","){ r.push(c); c = ""; }
+    else if (ch === "\n" || ch === "\r"){ if (ch === "\r" && t[i+1] === "\n") i++; r.push(c); c = ""; rows.push(r); r = []; }
+    else c += ch;
+  }
+  if (c || r.length){ r.push(c); rows.push(r); }
+  const [h, ...body] = rows;
+  const keys = h.map(k => k.trim().toLowerCase());
+  return body.filter(b => b.some(x => x.trim()))
+             .map(b => Object.fromEntries(keys.map((k, i) => [k, (b[i] || "").trim()])));
 }
 
-function render() {
-  makeChips($("pieceChips"), PIECES, "piece");
-  makeChips($("originChips"), ORIGINS, "origin");
+const toPiece = o => ({
+  name: o.name,
+  price: o.price,
+  colours: (o.colour || "").split(";").map(s => s.trim().toLowerCase()).filter(Boolean),
+  pairing: (o.pairing || "").toLowerCase(),
+  img: o.image ? (/^(https?:|\/)/.test(o.image) ? o.image : IMG_FOLDER + o.image) : "",
+  sold: /^(yes|y|true|1|sold)$/i.test(o.sold || "")
+});
 
-  const list = PRODUCTS.filter(p => matches(p, state.piece, state.origin))
-    .sort((a, b) => (a.soldOut ? 1 : 0) - (b.soldOut ? 1 : 0));  // sold pieces go last
-  const filtered = state.piece !== "All" || state.origin !== "All";
-  $("count").textContent = list.length + (list.length === 1 ? " piece" : " pieces");
-  $("clear").hidden = !filtered;
-  $("empty").hidden = list.length > 0;
+let PIECES = [], pair = "all", colour = "all";
 
-  const grid = $("grid");
-  grid.innerHTML = "";
-  list.forEach(p => {
-    const el = document.createElement("article");
-    el.className = "item" + (p.soldOut ? " sold" : "");
-
-    const photo = document.createElement("div");
-    photo.className = "photo";
-    const placeholder = () => { photo.innerHTML = '<span class="ph">Silvique</span>'; };
-    let img = null;
-    if (p.image) {
-      img = document.createElement("img");
-      img.src = p.image; img.alt = p.name; img.loading = "lazy";
-      img.onerror = () => {
-        if (img.getAttribute("src") !== p.image) img.src = p.image;   // a colour photo is missing: go back to the main one
-        else { img.remove(); img = null; placeholder(); }
-      };
-      photo.appendChild(img);
-    } else {
-      placeholder();
-    }
-
-    const h = document.createElement("h2"); h.textContent = p.name;
-    const pr = document.createElement("p"); pr.className = "price"; pr.textContent = fmt(p.price);
-    let a, opts = null;
-    if (p.soldOut) {
-      a = document.createElement("span");
-      a.className = "order soldout"; a.textContent = "Sold out";
-      a.setAttribute("aria-disabled", "true");
-    } else {
-      a = document.createElement("a");
-      a.className = "order"; a.target = "_blank"; a.rel = "noopener";
-
-      // Colour / size choices (only shown if the product has them)
-      const groups = [["Colour", norm(optionsFor(p, "colours"))], ["Size", norm(optionsFor(p, "sizes"))]].filter(g => g[1].length);
-      const pick = {};
-      groups.forEach(([label, list]) => { pick[label] = list.length === 1 ? list[0] : null; });
-
-      const refresh = () => {
-        const missing = groups.filter(([label]) => !pick[label]).map(([label]) => label.toLowerCase());
-        if (missing.length) {
-          a.classList.add("pending");
-          a.removeAttribute("href");
-          a.setAttribute("aria-disabled", "true");
-          a.textContent = missing.length === 2 ? "Choose colour and size" : "Choose a " + missing[0];
-        } else {
-          const chosen = groups.map(([label]) => label + ": " + pick[label].name);
-          a.classList.remove("pending");
-          a.removeAttribute("aria-disabled");
-          a.textContent = "Order on WhatsApp";
-          a.href = wa("Hi Silvique, I'd like to order the " + p.name + (chosen.length ? ", " + chosen.join(", ") : "") + " (" + fmt(p.price) + ").");
-        }
-      };
-
-      if (groups.length) {
-        opts = document.createElement("div");
-        opts.className = "opts";
-        groups.forEach(([label, list]) => {
-          const row = document.createElement("div");
-          const lab = document.createElement("span"); lab.className = "opt-label"; lab.textContent = label;
-          const chips = document.createElement("div"); chips.className = "opt-chips";
-          list.forEach(o => {
-            const b = document.createElement("button");
-            b.type = "button"; b.className = "opt-chip"; b.textContent = o.name;
-            b.setAttribute("aria-pressed", String(pick[label] === o));
-            b.onclick = () => {
-              pick[label] = o;
-              chips.querySelectorAll(".opt-chip").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-              if (img) img.src = o.image || p.image;   // colours without their own photo show the main one
-              refresh();
-            };
-            chips.appendChild(b);
-          });
-          row.append(lab, chips);
-          opts.appendChild(row);
-        });
-      }
-      refresh();
-    }
-    if (opts) el.append(photo, h, pr, opts, a); else el.append(photo, h, pr, a);
-    grid.appendChild(el);
-  });
+function renderFilters(){
+  const colours = [...new Set(PIECES.flatMap(p => p.colours))];
+  const pill = (g, v, label, on) => `<button class="pill${on ? " on" : ""}" data-g="${g}" data-v="${esc(v)}">${esc(label)}</button>`;
+  $("filters").innerHTML =
+    `<div class="frow">${pill("pair","all","All styles",pair==="all")}${pill("pair","matched","Matched",pair==="matched")}${pill("pair","mismatched","Mismatched",pair==="mismatched")}</div>` +
+    `<div class="frow">${pill("colour","all","All colours",colour==="all")}${colours.map(c => pill("colour", c, cap(c), colour===c)).join("")}</div>`;
 }
 
-$("clear").onclick = () => { state.piece = "All"; state.origin = "All"; render(); };
-$("footWa").href = wa("Hi Silvique, I have a question about your jewellery.");
-render();
+function draw(){
+  const list = PIECES.filter(p => (pair === "all" || p.pairing === pair) && (colour === "all" || p.colours.includes(colour)));
+  $("grid").innerHTML = list.length ? list.map(p => `
+    <article class="card${p.sold ? " sold" : ""}">
+      <div class="ph">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.name)} earrings" loading="lazy" onerror="this.parentNode.textContent='Photo coming soon'">` : "Photo coming soon"}</div>
+      <h3>${esc(p.name)}</h3>
+      <div class="tag">${esc([cap(p.pairing), p.colours.map(cap).join(", ")].filter(Boolean).join(" · "))}</div>
+      <div class="row"><span>KES ${esc(p.price)}</span>
+        ${p.sold ? "<span>Sold out</span>" : `<a href="${wa(`Hi Silvique, I’d like to order the ${p.name} earrings (KES ${p.price}).`)}" target="_blank" rel="noopener">Order on WhatsApp</a>`}</div>
+    </article>`).join("") : `<p class="sub">No pairs here yet. Try another filter.</p>`;
+}
+
+$("filters").addEventListener("click", e => {
+  const b = e.target.closest(".pill");
+  if (!b) return;
+  if (b.dataset.g === "pair") pair = b.dataset.v; else colour = b.dataset.v;
+  renderFilters(); draw();
+});
+
+(async () => {
+  let text = FALLBACK_CSV;
+  try {
+    const res = await fetch(SHEET);
+    if (res.ok){
+      const t = await res.text();
+      if (/^\uFEFF?name,/i.test(t.trim())) text = t;
+    }
+  } catch (e) { /* uses the sample rows */ }
+  PIECES = parseCSV(text.replace(/^\uFEFF/, "")).map(toPiece).filter(p => p.name);
+  renderFilters(); draw();
+})();
 </script>
 </body>
 </html>
