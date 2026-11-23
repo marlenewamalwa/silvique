@@ -32,12 +32,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:
 nav a{text-decoration:none;margin-left:26px}
 nav .logo{font-family:var(--script);font-size:34px;margin:0;line-height:1}
 
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;padding:90px 28px 64px;position:relative;overflow:hidden}
-.hero-img{position:absolute;inset:0;background:radial-gradient(circle at 60% 40%,#4a4a4a,#101010 70%);display:flex;align-items:center;justify-content:center;color:#777;font-size:13px}
-.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
-.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(0,0,0,.7));pointer-events:none}
-.hero .btn{position:relative;z-index:1}
-
 .frow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 #filters{margin-bottom:40px}
 .pill{font:inherit;font-size:14px;padding:8px 18px;border:1px solid #000;background:transparent;color:#000;border-radius:99px;cursor:pointer}
@@ -54,13 +48,6 @@ nav .logo{font-family:var(--script);font-size:34px;margin:0;line-height:1}
 .card .row a:hover,.card .row a:focus-visible{background:#1ebe5b}
 .card.sold .ph{opacity:.4}
 
-.story{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
-.story .ph2{aspect-ratio:4/5;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:13px;overflow:hidden}
-.story .ph2 img{width:100%;height:100%;object-fit:cover}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
-.facts b{display:block;font-weight:400;font-size:20px}
-.facts span{color:var(--mute);font-size:15px}
-
 .faq{max-width:760px}
 details{border-top:1px solid var(--line);padding:20px 0}
 .light details{border-color:#ddd}
@@ -71,53 +58,29 @@ summary::after{content:"+"}
 details[open] summary::after{content:"–"}
 details p{color:var(--mute);margin:12px 0 0;max-width:56ch}
 
-footer{padding:90px 0 120px;text-align:center}
-footer .big{font-family:var(--script);font-size:clamp(90px,18vw,220px);line-height:.85;margin:0 0 30px}
+footer{padding:40px 0 50px;text-align:center}
 footer p{color:var(--mute);margin:6px 0}
 
-.float{position:fixed;right:max(18px,env(safe-area-inset-right,0px));z-index:30;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid #444;box-shadow:0 6px 24px rgba(0,0,0,.35);transition:transform .2s}
+.float{position:fixed;left:max(18px,env(safe-area-inset-left,0px));z-index:30;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid #444;box-shadow:0 6px 24px rgba(0,0,0,.35);transition:transform .2s}
 .float:hover,.float:focus-visible{transform:scale(1.08)}
 .float svg{width:26px;height:26px}
 .wa{bottom:calc(20px + env(safe-area-inset-bottom,0px));background:#25D366;border-color:#25D366;color:#fff}
 .ig{bottom:calc(86px + env(safe-area-inset-bottom,0px));background:#000;color:#fff}
 
-@media(max-width:820px){section{padding:80px 0}.grid{grid-template-columns:1fr 1fr;gap:32px 14px}.story{grid-template-columns:1fr;gap:40px}nav a:not(.logo){display:none}}
+@media(max-width:820px){section{padding:80px 0}.grid{grid-template-columns:1fr 1fr;gap:32px 14px}nav a:not(.logo){display:none}}
 @media(max-width:480px){.grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 
-<nav><a class="logo" href="#top">Silvique</a><div><a href="#shop">Shop</a><a href="#story">Story</a><a href="#faq">FAQ</a></div></nav>
-
-<header class="hero" id="top">
-  <div class="hero-img" id="heroImg">Hero photo goes here</div>
-  <h1 class="sr">Silvique, handmade earrings</h1>
-  <a class="btn" href="#shop">Shop the earrings</a>
-</header>
+<nav><a class="logo" href="#">Silvique</a><div><a href="#shop">Shop</a><a href="#faq">FAQ</a></div></nav>
 
 <section class="light" id="shop">
   <div class="wrap">
-    <h2>The earrings</h2>
     <p class="sub">Every pair is made by hand in Kenya. Tap order and we’ll finish up on WhatsApp.</p>
     <div id="filters"></div>
     <div class="grid" id="grid"></div>
-  </div>
-</section>
-
-<section id="story">
-  <div class="wrap story">
-    <div class="ph2" id="storyImg">Your photo here</div>
-    <div>
-      <h2>Small, slow and made to be noticed.</h2>
-      <p style="color:var(--mute);max-width:46ch">Silvique started with silver and a love for pieces that feel personal. Now it’s earrings only: pearls, stones, shells and charms, strung and finished by hand.</p>
-      <div class="facts">
-        <div><b>Handmade</b><span>Each pair made to order.</span></div>
-        <div><b>Delivered</b><span>Across Kenya.</span></div>
-        <div><b>Gift ready</b><span>Packed with care.</span></div>
-        <div><b>Easy orders</b><span>Just message us.</span></div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -135,10 +98,8 @@ footer p{color:var(--mute);margin:6px 0}
 
 <footer>
   <div class="wrap">
-    <p class="big">Silvique</p>
-    <p>Handmade earrings, Kenya</p>
     <p><a href="#" id="waLink2">WhatsApp</a> &nbsp;·&nbsp; <a href="#" id="igLink2" target="_blank" rel="noopener">Instagram</a></p>
-    <p style="margin-top:36px;font-size:13px">© <span id="yr"></span> Silvique</p>
+    <p style="margin-top:12px;font-size:13px">© <span id="yr"></span> Silvique · Handmade earrings, Kenya</p>
   </div>
 </footer>
 
@@ -155,8 +116,6 @@ const WA = "254700000000";     // WhatsApp number, country code first, no + or s
 const IG = "silvique";         // Instagram handle
 const SHEET = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFof0hKRHRAdcKPTRLz0V51KRM445nL0sGRYQtgPzeQGlCYG5pA16t9qlXaCAzyVYMg40eE_af6usi/pub?output=csv";  // file next to index.html, or a Google Sheets "publish to web" CSV link
 const IMG_FOLDER = "images/";  // where your photos live
-const HERO_IMG = "";           // e.g. "images/hero.jpg"
-const STORY_IMG = "";          // e.g. "images/story.jpg"
 /* ======================== */
 
 /* Sample rows, used only if products.csv can't be loaded (e.g. opening the file directly) */
@@ -177,8 +136,6 @@ $("waFloat").href = wa("Hi Silvique, I’d like to ask about your earrings.");
 $("waLink2").href = wa("Hi Silvique!");
 $("igFloat").href = $("igLink2").href = `https://instagram.com/${IG}`;
 $("yr").textContent = new Date().getFullYear();
-if (HERO_IMG) $("heroImg").innerHTML = `<img src="${HERO_IMG}" alt="Silvique handmade earrings">`;
-if (STORY_IMG) $("storyImg").innerHTML = `<img src="${STORY_IMG}" alt="Silvique earrings">`;
 
 function parseCSV(t){
   const rows = []; let r = [], c = "", q = false;
