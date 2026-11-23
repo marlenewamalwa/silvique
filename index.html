@@ -46,7 +46,10 @@ nav .logo{font-family:var(--script);font-size:34px;margin:0;line-height:1}
 .card .row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mute);font-size:15px}
 .card .row a{background:#25D366;color:#04210e;font-weight:500;font-size:14px;padding:9px 16px;border-radius:99px;text-decoration:none;transition:background .2s}
 .card .row a:hover,.card .row a:focus-visible{background:#1ebe5b}
-.card.sold .ph{opacity:.4}
+.card .soldtag{color:#d62828;font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+.card .acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.card .row a.ghost{background:transparent;color:#000;border:1px solid #000}
+.card .row a.ghost:hover,.card .row a.ghost:focus-visible{background:#000;color:#fff}
 
 .faq{max-width:760px}
 details{border-top:1px solid var(--line);padding:20px 0}
@@ -178,10 +181,10 @@ function draw(){
   $("grid").innerHTML = list.length ? list.map(p => `
     <article class="card${p.sold ? " sold" : ""}">
       <div class="ph">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.name)} earrings" loading="lazy" onerror="this.parentNode.textContent='Photo coming soon'">` : "Photo coming soon"}</div>
-      <h3>${esc(p.name)}</h3>
+      <h3>${esc(p.name)}${p.sold ? ' <span class="soldtag">Sold out</span>' : ""}</h3>
       <div class="tag">${esc([cap(p.pairing), p.colours.map(cap).join(", ")].filter(Boolean).join(" · "))}</div>
       <div class="row"><span>KES ${esc(p.price)}</span>
-        ${p.sold ? "<span>Sold out</span>" : `<a href="${wa(`Hi Silvique, I’d like to order the ${p.name} earrings (KES ${p.price}).`)}" target="_blank" rel="noopener">Order on WhatsApp</a>`}</div>
+        <div class="acts">${p.sold ? "" : `<a href="${wa(`Hi Silvique, I’d like to order the ${p.name} earrings (KES ${p.price}).`)}" target="_blank" rel="noopener">Order on WhatsApp</a>`}<a class="ghost" href="${wa(`Hi Silvique, can you make me a pair like the ${p.name}? I’d like something similar.`)}" target="_blank" rel="noopener">Make me a pair like this</a></div></div>
     </article>`).join("") : `<p class="sub">No pairs here yet. Try another filter.</p>`;
 }
 
